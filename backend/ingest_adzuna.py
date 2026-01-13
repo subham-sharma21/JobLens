@@ -32,7 +32,7 @@ def extract_experience(text: str):
     return None, None
 
 # ========= CONFIG =========
-APP_ID = os.getenv
+APP_ID = os.getenv("ADZUNA_APP_ID")
 APP_KEY = os.getenv("ADZUNA_APP_KEY")
 
 BASE_URL = "https://api.adzuna.com/v1/api/jobs/in/search/1"
