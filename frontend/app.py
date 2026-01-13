@@ -1,0 +1,79 @@
+import streamlit as st
+import requests
+import pandas as pd
+import pydeck as pdk
+
+API_URL = "http://127.0.0.1:8000/map/heatmap"
+
+st.set_page_config(page_title="Job Market Map", layout="wide")
+st.title("India Job Market Map")
+
+# -------- Role Filter --------
+# -------- Filters --------
+params = {}
+
+role = st.selectbox(
+    "Select Role",
+    ["All", "Data Analyst", "Data Scientist", "Data Engineer", "Backend Engineer"]
+)
+
+if role != "All":
+    params["role"] = role
+
+exp_range = st.slider(
+    "Experience Range (years)",
+    min_value=0,
+    max_value=15,
+    value=(0, 15)
+)
+
+params["exp_min"] = exp_range[0]
+params["exp_max"] = exp_range[1]
+
+
+# -------- Fetch data --------
+response = requests.get(API_URL, params=params)
+data = response.json()
+
+if not data:
+    st.warning("No data found")
+    st.stop()
+
+df = pd.DataFrame(data)
+
+# -------- View control --------
+view_state = pdk.ViewState(
+    latitude=22.5937,
+    longitude=78.9629,
+    zoom=4,      # User can zoom manually
+    pitch=0,
+)
+
+# -------- Heatmap Layer --------
+heatmap_layer = pdk.Layer(
+    "HeatmapLayer",
+    data=df,
+    get_position=["lon", "lat"],
+    get_weight="job_count",
+    radiusPixels=60,
+)
+
+# -------- Clustered Scatter Layer --------
+cluster_layer = pdk.Layer(
+    "ScatterplotLayer",
+    data=df,
+    get_position=["lon", "lat"],
+    get_radius="job_count * 100",
+    get_fill_color=[255, 0, 0, 140],
+    pickable=True,
+)
+
+deck = pdk.Deck(
+    layers=[heatmap_layer, cluster_layer],
+    initial_view_state=view_state,
+    tooltip={
+        "text": "{city}\nJobs: {job_count}"
+    }
+)
+
+st.pydeck_chart(deck)
