@@ -72,8 +72,12 @@ JobLens transforms raw job market data into actionable geographic insights:
 ## 🏗️ System Architecture
 
 ```mermaid
-graph LR
-    A[Adzuna Job API] --> B[Python Ingestion Pipeline] --> C[PostgreSQL + PostGIS Database] --> D[FastAPI Backend] --> E[Streamlit Frontend] --> F[Interactive Maps & Filters]
+graph TD
+    A[Adzuna Job API] --> B[Python Ingestion Pipeline]
+    B --> C[PostgreSQL + PostGIS Database]
+    C --> D[FastAPI Backend]
+    D --> E[Streamlit Frontend]
+    E --> F[Interactive Maps & Filters]
 ```
 
 ---
