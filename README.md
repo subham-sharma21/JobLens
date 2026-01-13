@@ -229,7 +229,7 @@ streamlit run frontend/app.py --server.port 8501
 | `LOG_LEVEL` | Logging level (DEBUG, INFO, WARNING, ERROR) | ❌ |
 | `MAX_JOBS_PER_REQUEST` | Maximum jobs to fetch per API call | ❌ |
 
-### API Configuration
+<!-- ### API Configuration
 ```python
 # backend/config.py
 ADZUNA_BASE_URL = "https://api.adzuna.com/v1/api/jobs"
@@ -237,7 +237,7 @@ DEFAULT_COUNTRY = "us"  # United States
 DEFAULT_LOCATION = "new york"
 ```
 
----
+--- -->
 
 ## 📊 Usage
 
