@@ -1,10 +1,33 @@
-# 🔍 JobLens — Job Market Intelligence Platform
+# 🔍 JobLens - Job Market Intelligence Platform
 
 **JobLens** is an end-to-end job market intelligence system that aggregates real job postings, processes them through a backend analytics pipeline, and visualizes **geographic job demand** using interactive heatmaps and clustered maps.
 
 This project is built with a **production-first mindset**, focusing on data engineering, backend-driven analytics, and scalable geospatial visualization.
 
----
+
+- [🔍 JobLens - Job Market Intelligence Platform](#-joblens---job-market-intelligence-platform)
+  - [🚀 What JobLens Does](#-what-joblens-does)
+  - [🧠 Why JobLens Is Different](#-why-joblens-is-different)
+  - [🏗️ System Architecture](#️-system-architecture)
+  - [🧩 Key Features](#-key-features)
+    - [🔥 Job Demand Heatmap](#-job-demand-heatmap)
+    - [📍 Clustered Markers](#-clustered-markers)
+    - [🎛️ Backend-Driven Filters](#️-backend-driven-filters)
+    - [🧠 Experience Extraction](#-experience-extraction)
+  - [🛠️ Tech Stack](#️-tech-stack)
+    - [Backend](#backend)
+    - [Data \& Processing](#data--processing)
+    - [Frontend](#frontend)
+    - [Dev \& Environment](#dev--environment)
+  - [📂 Project Structure](#-project-structure)
+  - [⚙️ Local Setup \& Run](#️-local-setup--run)
+    - [1️⃣ Clone the Repository](#1️⃣-clone-the-repository)
+    - [2️⃣ Create Virtual Environment](#2️⃣-create-virtual-environment)
+    - [3️⃣ Install Dependencies](#3️⃣-install-dependencies)
+    - [4️⃣ Configure Environment Variables](#4️⃣-configure-environment-variables)
+    - [5️⃣ Start Backend](#5️⃣-start-backend)
+    - [6️⃣ Run Frontend](#6️⃣-run-frontend)
+
 
 ## 🚀 What JobLens Does
 
@@ -44,28 +67,6 @@ This mirrors how real analytics platforms are built.
 
 <!-- code_chunk_output -->
 
-- [🔍 JobLens — Job Market Intelligence Platform](#-joblens--job-market-intelligence-platform)
-  - [🚀 What JobLens Does](#-what-joblens-does)
-  - [🧠 Why JobLens Is Different](#-why-joblens-is-different)
-  - [🏗️ System Architecture](#️-system-architecture)
-  - [🧩 Key Features](#-key-features)
-    - [🔥 Job Demand Heatmap](#-job-demand-heatmap)
-    - [📍 Clustered Markers](#-clustered-markers)
-    - [🎛️ Backend-Driven Filters](#️-backend-driven-filters)
-    - [🧠 Experience Extraction](#-experience-extraction)
-  - [🛠️ Tech Stack](#️-tech-stack)
-    - [Backend](#backend)
-    - [Data & Processing](#data--processing)
-    - [Frontend](#frontend)
-    - [Dev & Environment](#dev--environment)
-  - [📂 Project Structure](#-project-structure)
-  - [⚙️ Local Setup & Run](#️-local-setup--run)
-    - [1️⃣ Clone the Repository](#1️⃣-clone-the-repository)
-    - [2️⃣ Create Virtual Environment](#2️⃣-create-virtual-environment)
-    - [3️⃣ Install Dependencies](#3️⃣-install-dependencies)
-    - [4️⃣ Configure Environment Variables](#4️⃣-configure-environment-variables)
-    - [5️⃣ Start Backend](#5️⃣-start-backend)
-
 <!-- /code_chunk_output -->
 
 ```
@@ -81,7 +82,7 @@ Streamlit Frontend (Maps + Filters)
 ```
 
 
----
+
 
 ## 🧩 Key Features
 
@@ -105,7 +106,7 @@ Streamlit Frontend (Maps + Filters)
 - Converts unstructured text into structured experience ranges
 - Enables meaningful experience-based analysis
 
----
+
 
 ## 🛠️ Tech Stack
 
@@ -130,7 +131,7 @@ Streamlit Frontend (Maps + Filters)
 - Environment variables (`.env`)
 - Git-safe secret management
 
----
+
 
 ## 📂 Project Structure
 ```
@@ -155,7 +156,7 @@ joblens/
 ```
 
 
----
+
 
 ## ⚙️ Local Setup & Run
 
