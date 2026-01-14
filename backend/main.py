@@ -11,6 +11,14 @@ from backend.models import Base
 
 Base.metadata.create_all(bind=engine)
 
+#------------ data ingestion endpoint -----------
+from backend.ingest_adzuna import ingest_jobs
+
+@app.post("/admin/ingest")
+def ingest_data(db: Session = Depends(get_db)):
+    ingest_jobs(db)
+    return {"status": "ingestion complete"}
+
 # -------------------------------
 app = FastAPI(title="Job Market Map API")
 
