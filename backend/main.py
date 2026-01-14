@@ -5,6 +5,13 @@ from sqlalchemy import func
 from backend.database import SessionLocal
 from backend.models import Job
 
+
+from backend.database import engine
+from backend.models import Base
+
+Base.metadata.create_all(bind=engine)
+
+# -------------------------------
 app = FastAPI(title="Job Market Map API")
 
 
@@ -71,3 +78,6 @@ def get_heatmap(
         }
         for r in results
     ]
+
+
+
