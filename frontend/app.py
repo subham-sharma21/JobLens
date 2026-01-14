@@ -6,14 +6,14 @@ import pydeck as pdk
 
 API_BASE_URL = os.getenv("API_BASE_URL")
 
-if not API_BASE_URL:
-    st.error("API_BASE_URL not set")
-    st.stop()
+# if not API_BASE_URL:
+#     st.error("API_BASE_URL not set")
+#     st.stop()
 
 API_URL = f"{API_BASE_URL}/map/heatmap"
 
 
-#API_URL = "http://127.0.0.1:8000/map/heatmap" #localhost for testing
+# API_URL = "http://127.0.0.1:8000/map/heatmap" #localhost for testing
 
 
 st.set_page_config(page_title="JobLens", layout="wide")
@@ -88,3 +88,4 @@ deck = pdk.Deck(
 )
 
 st.pydeck_chart(deck)
+# st.write("Backend URL:", API_BASE_URL)
