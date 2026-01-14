@@ -8,7 +8,7 @@ from backend.models import Job
 app = FastAPI(title="Job Market Map API")
 
 
-# DB session dependency
+# ---------------- DB session dependency ----------------
 def get_db():
     db = SessionLocal()
     try:
@@ -17,11 +17,13 @@ def get_db():
         db.close()
 
 
+# ---------------- Health check ----------------
 @app.get("/")
 def health_check():
     return {"status": "API running"}
 
 
+# ---------------- Heatmap endpoint ----------------
 @app.get("/map/heatmap")
 def get_heatmap(
     role: str | None = None,
@@ -36,28 +38,36 @@ def get_heatmap(
             Job.longitude,
             func.count(Job.job_id).label("job_count")
         )
-        .group_by(Job.city, Job.latitude, Job.longitude)
+        .filter(
+            Job.latitude.isnot(None),
+            Job.longitude.isnot(None)
+        )
+        .group_by(
+            Job.city,
+            Job.latitude,
+            Job.longitude
+        )
     )
 
+    # ---- Role filter ----
     if role:
         query = query.filter(Job.normalized_role == role)
 
+    # ---- Experience filters ----
     if exp_min is not None:
-        query = query.filter(Job.experience_min >= exp_min)
+        query = query.filter(Job.experience_max >= exp_min)
 
     if exp_max is not None:
-        query = query.filter(Job.experience_max <= exp_max)
+        query = query.filter(Job.experience_min <= exp_max)
 
     results = query.all()
 
-    data = []
-    for row in results:
-        if row.latitude and row.longitude:
-            data.append({
-                "city": row.city,
-                "lat": row.latitude,
-                "lon": row.longitude,
-                "job_count": row.job_count
-            })
-
-    return data
+    return [
+        {
+            "city": r.city,
+            "lat": r.latitude,
+            "lon": r.longitude,
+            "job_count": r.job_count
+        }
+        for r in results
+    ]

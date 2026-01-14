@@ -4,28 +4,20 @@ import requests
 import pandas as pd
 import pydeck as pdk
 
-API_BASE_URL = os.getenv("API_BASE_URL")
-
-# if not API_BASE_URL:
-#     st.error("API_BASE_URL not set")
-#     st.stop()
-
+# ---------------- Backend API config ----------------
+API_BASE_URL = os.getenv("API_BASE_URL", "http://127.0.0.1:8000")
 API_URL = f"{API_BASE_URL}/map/heatmap"
 
-
-# API_URL = "http://127.0.0.1:8000/map/heatmap" #localhost for testing
-
-
+# ---------------- Streamlit config ----------------
 st.set_page_config(page_title="JobLens", layout="wide")
-st.title("India Job Market Map")
+st.title("JobLens — India Job Market Map")
 
-# -------- Role Filter --------
-# -------- Filters --------
+# ---------------- Filters ----------------
 params = {}
 
 role = st.selectbox(
     "Select Role",
-    ["All", "Data Analyst", "Data Scientist", "Data Engineer", "Backend Engineer"]
+    ["All", "data analyst", "data scientist", "data engineer", "backend engineer"]
 )
 
 if role != "All":
@@ -34,33 +26,38 @@ if role != "All":
 exp_range = st.slider(
     "Experience Range (years)",
     min_value=0,
-    max_value=15,
-    value=(0, 15)
+    max_value=20,
+    value=(0, 20)
 )
 
 params["exp_min"] = exp_range[0]
 params["exp_max"] = exp_range[1]
 
-
-# -------- Fetch data --------
-response = requests.get(API_URL, params=params, timeout=60)
-data = response.json()
+# ---------------- Fetch data ----------------
+with st.spinner("Fetching job market data..."):
+    try:
+        response = requests.get(API_URL, params=params, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        st.error("Backend API not reachable")
+        st.stop()
 
 if not data:
-    st.warning("No data found")
+    st.warning("No data found for selected filters")
     st.stop()
 
 df = pd.DataFrame(data)
 
-# -------- View control --------
+# ---------------- Map view ----------------
 view_state = pdk.ViewState(
     latitude=22.5937,
     longitude=78.9629,
-    zoom=4,      # User can zoom manually
+    zoom=4,
     pitch=0,
 )
 
-# -------- Heatmap Layer --------
+# ---------------- Heatmap Layer ----------------
 heatmap_layer = pdk.Layer(
     "HeatmapLayer",
     data=df,
@@ -69,12 +66,12 @@ heatmap_layer = pdk.Layer(
     radiusPixels=60,
 )
 
-# -------- Clustered Scatter Layer --------
+# ---------------- Cluster Layer ----------------
 cluster_layer = pdk.Layer(
     "ScatterplotLayer",
     data=df,
     get_position=["lon", "lat"],
-    get_radius="job_count * 100",
+    get_radius="job_count * 80",
     get_fill_color=[255, 0, 0, 140],
     pickable=True,
 )
@@ -82,10 +79,7 @@ cluster_layer = pdk.Layer(
 deck = pdk.Deck(
     layers=[heatmap_layer, cluster_layer],
     initial_view_state=view_state,
-    tooltip={
-        "text": "{city}\nJobs: {job_count}"
-    }
+    tooltip={"text": "{city}\nJobs: {job_count}"}
 )
 
 st.pydeck_chart(deck)
-# st.write("Backend URL:", API_BASE_URL)
