@@ -1,11 +1,22 @@
+import os
 import streamlit as st
 import requests
 import pandas as pd
 import pydeck as pdk
 
-API_URL = "http://127.0.0.1:8000/map/heatmap"
+API_BASE_URL = os.getenv("API_BASE_URL")
 
-st.set_page_config(page_title="Job Market Map", layout="wide")
+if not API_BASE_URL:
+    st.error("API_BASE_URL not set")
+    st.stop()
+
+API_URL = f"{API_BASE_URL}/map/heatmap"
+
+
+#API_URL = "http://127.0.0.1:8000/map/heatmap" #localhost for testing
+
+
+st.set_page_config(page_title="JobLens", layout="wide")
 st.title("India Job Market Map")
 
 # -------- Role Filter --------
@@ -32,7 +43,7 @@ params["exp_max"] = exp_range[1]
 
 
 # -------- Fetch data --------
-response = requests.get(API_URL, params=params)
+response = requests.get(API_URL, params=params, timeout=60)
 data = response.json()
 
 if not data:
