@@ -1,301 +1,161 @@
-# 🔍 JobLens - Job Market Intelligence Platform
+# 🔍 JobLens 2.0 — Geospatial Labor Market Intelligence Platform
 
 <div align="center">
 
-![JobLens Logo](https://img.shields.io/badge/JobLens-Intelligence%20Platform-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K)
+![JobLens Logo](https://img.shields.io/badge/JobLens-2.0%20Intelligence-2563EB?style=for-the-badge&logo=compass&logoColor=white)
 
-**An end-to-end job market intelligence system that aggregates real job postings, processes them through a backend analytics pipeline, and visualizes geographic job demand using interactive heatmaps and clustered maps.**
+**An enterprise labor market intelligence platform that monitors live corporate applicant tracking systems (Greenhouse & Lever) across India and Global tech ecosystems, geocodes hiring demand, and visualizes market concentration with an interactive Next.js map dashboard.**
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org) [![FastAPI](https://img.shields.io/badge/FastAPI-0.68+-green.svg)](https://fastapi.tiangolo.com) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-blue.svg)](https://postgresql.org) [![Streamlit](https://img.shields.io/badge/Streamlit-1.0+-red.svg)](https://streamlit.io) [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-14+-black.svg)](https://nextjs.org) [![FastAPI](https://img.shields.io/badge/FastAPI-2.0+-green.svg)](https://fastapi.tiangolo.com) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-PostGIS%20%2F%20SQLite-blue.svg)](https://postgresql.org) [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://typescriptlang.org) [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4+-38bdf8.svg)](https://tailwindcss.com)
 
 </div>
 
 ---
 
-## 📋 Table of Contents
+## 🚀 Key Features
 
-- [🚀 What JobLens Does](#-what-joblens-does)
-- [🧠 Why JobLens Is Different](#-why-joblens-is-different)
-- [🏗️ System Architecture](#️-system-architecture)
-- [✨ Key Features](#-key-features)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [📂 Project Structure](#-project-structure)
-- [⚙️ Quick Start](#️-quick-start)
-- [🔧 Configuration](#-configuration)
-- [📊 Usage](#-usage)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-
----
-
-## 🚀 What JobLens Does
-
-JobLens transforms raw job market data into actionable geographic insights:
-
-- **🔄 Real-time Data Ingestion** - Connects to external job APIs (Adzuna) for live data
-- **🗄️ Intelligent Storage** - Normalizes and stores job data in a geo-enabled PostgreSQL database
-- **📍 Location Aggregation** - Groups job demand by geographic regions
-- **🎨 Interactive Visualization** - Creates dynamic heatmaps and clustered markers
-- **🎛️ Smart Filtering** - Provides backend-driven filters for roles and experience levels
-
-> **All filtering and aggregation is performed server-side**, ensuring scalability and performance.
-
----
-
-## 🧠 Why JobLens Is Different
-
-<table>
-<tr>
-<th>❌ Most Job Market Projects</th>
-<th>✅ JobLens Approach</th>
-</tr>
-<tr>
-<td>
-• Rely on static CSV datasets<br>
-• Apply filters on the frontend<br>
-• Don't scale beyond small datasets<br>
-• Limited geographic analysis
-</td>
-<td>
-• Uses real ingestion pipeline<br>
-• Database-level filtering with SQL<br>
-• PostgreSQL + PostGIS for geospatial queries<br>
-• Clean separation of concerns
-</td>
-</tr>
-</table>
-
-**JobLens mirrors how real analytics platforms are built** - with proper data engineering, scalable backend architecture, and efficient visualization.
+* **⚡ Direct ATS Multi-Company Ingestion**: Ingests directly from official Greenhouse and Lever API feeds (Meesho, CRED, Slice, Groww, Stripe, GitLab, Figma, Anthropic, Scale AI, Vercel, Airbnb, Coinbase, Datadog, etc.) — 0% ghost jobs, 0% dead links, no API keys required.
+* **🗺️ Synchronized Geospatial Map**: Interactive visual map with equirectangular mercator projections, city cluster bubbles, and heat intensity rings.
+* **🎛️ Real-Time Split-View Explorer**: Left-hand filterable job feed with right-hand map sync, keyword search, role categorization chips, and remote filter.
+* **📄 Slide-Over Job Detail Drawer**: Reads complete job specs, qualifications, and extracted tech stacks without page reloads, with a direct "Apply on Official Site" button.
+* **📊 Market Analytics Dashboard**: Real-time hiring volume leaderboards, in-demand technical skills index, and regional tech hub concentration charts.
+* **🏢 ATS Company Manager**: Live status dashboard displaying all monitored company boards, active job counts, and 1-click on-demand sync.
+* **🗄️ Dual-Mode Database Engine**: Runs on zero-config local SQLite (`joblens.db`) out-of-the-box, with instant switch to production PostgreSQL / PostGIS via `.env`.
 
 ---
 
 ## 🏗️ System Architecture
 
 ```mermaid
-graph TD
-    A[Adzuna Job API] --> B[Python Ingestion Pipeline]
-    B --> C[PostgreSQL + PostGIS Database]
-    C --> D[FastAPI Backend]
-    D --> E[Streamlit Frontend]
-    E --> F[Interactive Maps & Filters]
+flowchart TD
+    subgraph Trackers ["⚡ Async ATS Tracker Engine (Python / FastAPI)"]
+        direction TB
+        A["Company Registry (data/companies.json)\n• India: Meesho, CRED, Slice, Groww...\n• Global: Stripe, GitLab, Anthropic, Vercel, Figma..."]
+        B["Greenhouse API Tracker"]
+        C["Lever API Tracker"]
+        D["Location Geocoder & NLP Skill Extractor"]
+        A --> B & C --> D
+    end
+
+    subgraph Storage ["🗄️ Dual-Mode Database"]
+        E["PostgreSQL (Prod) / SQLite (Local Dev)"]
+    end
+
+    subgraph API ["🚀 FastAPI REST API (Port 8000)"]
+        F["/api/v1/jobs (Search, Filters, Pagination)"]
+        G["/api/v1/map (Geospatial Coordinates)"]
+        H["/api/v1/analytics (Leaderboards, Skills Demand)"]
+        I["/api/v1/companies (ATS Board Status & Sync)"]
+    end
+
+    subgraph Frontend ["💻 Next.js 14 Frontend (Port 3000)"]
+        J["Split-Screen Map & Job Explorer"]
+        K["Slide-Over Job Detail Drawer"]
+        L["Market Analytics Dashboard"]
+        M["ATS Tracker Manager"]
+    end
+
+    D --> E
+    E --> F & G & H & I
+    F & G & H & I --> J & K & L & M
 ```
-
----
-
-## ✨ Key Features
-
-### 🔥 Job Demand Heatmap
-- **Density-based visualization** of job market demand
-- **City-level aggregation** for clear geographic insights
-- **Performance optimized** for large datasets
-
-### 📍 Clustered Markers
-- **Zoom-aware clustering** that adapts to map level
-- **Job concentration indicators** per geographic region
-- **Smooth transitions** from macro to micro views
-
-### 🎛️ Backend-Driven Filters
-- **Role-based filtering** across job categories
-- **Experience range selection** (entry-level to senior)
-- **SQL-powered queries** for instant results
-
-### 🧠 Experience Extraction
-- **Regex-based NLP** parsing from job descriptions
-- **Structured data conversion** from unstructured text
-- **Meaningful analytics** on experience requirements
-
----
-<!-- 
-## 🛠️ Tech Stack
-
-<div align="center">
-
-### Backend & Data
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)
-
-### Frontend & Visualization
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
-![PyDeck](https://img.shields.io/badge/PyDeck-WebGL-orange?style=for-the-badge)
-
-### Development & Tools
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-
-</div> -->
 
 ---
 
 ## 📂 Project Structure
 
 ```
-joblens/
+JobLens/
 ├── 📁 backend/
-│   ├── 🐍 main.py              # FastAPI application entry point
-│   ├── 🗄️ database.py          # Database connection & configuration
-│   ├── 📊 models.py            # SQLAlchemy ORM models
-│   ├── 🔄 ingest_adzuna.py     # Job data ingestion pipeline
-│   └── 🛠️ utils.py             # Utility functions
+│   ├── 🐍 main.py              # FastAPI REST endpoints & CORS configuration
+│   ├── 🗄️ database.py          # SQLAlchemy dual-mode database engine (SQLite/Postgres)
+│   ├── 📊 models.py            # Job & Company ORM models
+│   ├── 🛠️ utils.py             # Geo & formatting utilities
+│   ├── 📁 trackers/            # ATS Ingestion Engine
+│   │   ├── base.py             # Abstract BaseTracker
+│   │   ├── greenhouse.py       # Greenhouse API parser
+│   │   ├── lever.py            # Lever API parser
+│   │   └── engine.py           # Async parallel ingestion orchestrator
+│   └── 📁 services/
+│       ├── geocoder.py         # Location normalizer & coordinate resolver
+│       └── extractor.py        # Regex NLP experience & skill extractor
 │
-├── 📁 frontend/
-│   └── 🎨 app.py               # Streamlit web application
+├── 📁 frontend/                # Next.js 14 Modern Web Dashboard
+│   ├── 📁 app/
+│   │   ├── layout.tsx          # Root layout & Header
+│   │   ├── page.tsx            # Main Split-Screen Map & Job Feed
+│   │   ├── globals.css         # Tailwind & custom animations
+│   │   ├── 📁 analytics/       # Market Intelligence Analytics view
+│   │   └── 📁 tracker/         # ATS Board sync & company manager
+│   ├── 📁 components/
+│   │   ├── Header.tsx          # Navigation & live ticker
+│   │   ├── InteractiveMap.tsx  # Map canvas with cluster nodes
+│   │   ├── JobCard.tsx         # Modern job card
+│   │   ├── JobDetailDrawer.tsx # Slide-out job specs viewer
+│   │   └── FilterSidebar.tsx   # Multi-faceted search & filter
+│   ├── 📁 lib/
+│   │   ├── api.ts              # Typed API client
+│   │   └── types.ts            # TypeScript interfaces
+│   ├── package.json
+│   └── tailwind.config.js
 │
 ├── 📁 data/
-│   ├── 📋 roles.csv            # Job role categories
+│   ├── 🏢 companies.json       # Monitored company registry
+│   ├── 📋 roles.csv            # Role taxonomy
 │   └── 🎯 skills.csv           # Skills taxonomy
 │
-├── ⚙️ .env.example             # Environment variables template
+├── 📁 tests/
+│   └── 🧪 test_api.py          # Automated Pytest suite
+│
+├── ⚙️ .env.example             # Environment configuration template
 ├── 📦 requirements.txt         # Python dependencies
-├── 🐳 Dockerfile              # Container configuration
-└── 📖 README.md               # Project documentation
+├── 🚀 run_backend.bat          # 1-Click start FastAPI backend
+├── 💻 run_frontend.bat         # 1-Click start Next.js frontend
+└── 🔄 sync_ats.bat             # 1-Click sync ATS jobs
 ```
 
 ---
 
-## ⚙️ Quick Start
+## ⚡ Quick Start
 
-### Prerequisites
-- Python 3.8+
-- PostgreSQL 13+ with PostGIS extension
-- Git
+### 1️⃣ Prerequisites
+* **Python 3.10+**
+* **Node.js 18+** & npm
 
-### 1️⃣ Clone & Setup
-```bash
-# Clone the repository
-git clone https://github.com/subham-sharma21/JobLens.git
+### 2️⃣ Start Backend (FastAPI)
+```powershell
+# Double-click run_backend.bat OR run via command line:
 cd JobLens
-
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
+.\venv\Scripts\activate
+uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
 ```
+* **API running on**: `http://127.0.0.1:8000`
+* **Interactive Docs**: `http://127.0.0.1:8000/docs`
 
-### 2️⃣ Install Dependencies
-```bash
-pip install -r requirements.txt
+### 3️⃣ Start Frontend (Next.js)
+```powershell
+# Double-click run_frontend.bat OR run via command line:
+cd JobLens/frontend
+npm run dev
 ```
+* **Web Dashboard**: `http://localhost:3000`
 
-### 3️⃣ Database Setup
-```bash
-# Install PostgreSQL and PostGIS
-# Create database
-createdb joblens
-psql joblens -c "CREATE EXTENSION postgis;"
+### 4️⃣ Sync Live Jobs (Greenhouse & Lever)
+```powershell
+# Run the ATS Ingestion Engine anytime to pull fresh postings:
+cd JobLens
+python -m backend.trackers.engine
 ```
-
-### 4️⃣ Environment Configuration
-```bash
-# Copy environment template
-cp .env.example .env
-
-# Edit .env with your configuration
-# DATABASE_URL=postgresql://username:password@localhost/joblens
-# ADZUNA_API_KEY=your_api_key
-# ADZUNA_APP_ID=your_app_id
-```
-
-### 5️⃣ Launch Application
-```bash
-# Terminal 1: Start backend
-uvicorn backend.main:app --reload --port 8000
-
-# Terminal 2: Start frontend
-streamlit run frontend/app.py --server.port 8501
-```
-
-<!-- ### 6️⃣ Access Application
-- **Frontend**: http://localhost:8501
-- **API Documentation**: http://localhost:8000/docs
-- **API Health Check**: http://localhost:8000/health -->
 
 ---
 
-## 🔧 Configuration
+## 🧪 Running Tests
 
-### Environment Variables
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `DATABASE_URL` | PostgreSQL connection string | ✅ |
-| `ADZUNA_API_KEY` | Adzuna API key for job data | ✅ |
-| `ADZUNA_APP_ID` | Adzuna application ID | ✅ |
-| `LOG_LEVEL` | Logging level (DEBUG, INFO, WARNING, ERROR) | ❌ |
-| `MAX_JOBS_PER_REQUEST` | Maximum jobs to fetch per API call | ❌ |
-
-<!-- ### API Configuration
-```python
-# backend/config.py
-ADZUNA_BASE_URL = "https://api.adzuna.com/v1/api/jobs"
-DEFAULT_COUNTRY = "us"  # United States
-DEFAULT_LOCATION = "new york"
+```powershell
+python -m pytest tests -v
 ```
-
---- -->
-
-## 📊 Usage
-
-### Data Ingestion
-```bash
-# Run job data ingestion
-python backend/ingest_adzuna.py --location "san francisco" --pages 10
-```
-
-### API Endpoints
-- `GET /jobs` - Retrieve filtered job data
-- `GET /jobs/heatmap` - Get heatmap data points
-- `GET /jobs/clusters` - Get clustered marker data
-- `GET /stats` - Get job market statistics
-
-### Frontend Features
-- **Interactive Map**: Pan, zoom, and explore job concentrations
-- **Dynamic Filters**: Filter by role, experience, and location
-- **Real-time Updates**: Data refreshes automatically
-- **Export Options**: Download filtered datasets
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-### Development Setup
-```bash
-# Install development dependencies
-pip install -r requirements-dev.txt
-
-# Run tests
-pytest
-
-# Code formatting
-black .
-isort .
-
-# Linting
-flake8 .
-```
-
-### Reporting Issues
-Please use our [Issue Template](.github/ISSUE_TEMPLATE.md) when reporting bugs or requesting features.
 
 ---
 
 ## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-<div align="center">
-
-**Built with ❤️ by [Subham Sharma](https://github.com/subham-sharma21)**
-
-⭐ **Star this repo if you find it helpful!** ⭐
-
-</div>
+MIT License.

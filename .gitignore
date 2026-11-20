@@ -1,13 +1,45 @@
 # Virtual env
 venv/
+.venv/
+env/
+
+# Node & Next.js
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+build/
+dist/
 
 # Environment variables
 .env
+.env.local
+.env*.local
 
 # Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.pyd.disabled
 
-# OS files
+# Database
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Testing & Linting
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# IDE & Editor files
+.vscode/*
+!.vscode/settings.json
+tempCodeRunnerFile.py
+backend/tempCodeRunnerFile.py
 .DS_Store
 Thumbs.db

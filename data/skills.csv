@@ -1,1 +1,11 @@
 skill,synonyms
+Python,python;py;python3;fastapi;django;flask
+SQL,sql;postgresql;mysql;sqlite;t-sql;pl/sql
+PostgreSQL,postgres;postgresql;postgis
+Machine Learning,ml;machine learning;deep learning;scikit-learn;tensorflow;pytorch
+Data Analysis,data analysis;bi;power bi;tableau;excel;pandas
+Cloud,aws;azure;gcp;cloud computing
+Docker,docker;container;docker-compose
+Kubernetes,k8s;kubernetes
+FastAPI,fastapi;starlette;uvicorn
+Streamlit,streamlit;dash;gradio

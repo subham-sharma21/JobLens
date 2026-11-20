@@ -1,0 +1,173 @@
+[
+  {
+    "name": "Meesho",
+    "slug": "meesho",
+    "ats": "lever",
+    "region": "India",
+    "industry": "E-Commerce / Social Commerce",
+    "website": "https://meesho.com",
+    "logo": "https://meesho.com/favicon.ico"
+  },
+  {
+    "name": "CRED",
+    "slug": "cred",
+    "ats": "lever",
+    "region": "India",
+    "industry": "Fintech / Credit & Rewards",
+    "website": "https://cred.club",
+    "logo": "https://cred.club/favicon.ico"
+  },
+  {
+    "name": "Slice",
+    "slug": "slice",
+    "ats": "greenhouse",
+    "region": "India",
+    "industry": "Fintech / Banking",
+    "website": "https://sliceit.com",
+    "logo": "https://sliceit.com/favicon.ico"
+  },
+  {
+    "name": "Groww",
+    "slug": "groww",
+    "ats": "greenhouse",
+    "region": "India",
+    "industry": "Fintech / WealthTech",
+    "website": "https://groww.in",
+    "logo": "https://groww.in/favicon.ico"
+  },
+  {
+    "name": "Stripe",
+    "slug": "stripe",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "Financial Infrastructure",
+    "website": "https://stripe.com",
+    "logo": "https://stripe.com/favicon.ico"
+  },
+  {
+    "name": "Figma",
+    "slug": "figma",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "Design & Collaboration",
+    "website": "https://figma.com",
+    "logo": "https://figma.com/favicon.ico"
+  },
+  {
+    "name": "GitLab",
+    "slug": "gitlab",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "DevSecOps Platform",
+    "website": "https://gitlab.com",
+    "logo": "https://gitlab.com/favicon.ico"
+  },
+  {
+    "name": "Anthropic",
+    "slug": "anthropic",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "AI & Safety Research (Claude)",
+    "website": "https://anthropic.com",
+    "logo": "https://anthropic.com/favicon.ico"
+  },
+  {
+    "name": "Scale AI",
+    "slug": "scaleai",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "AI Data Infrastructure",
+    "website": "https://scale.com",
+    "logo": "https://scale.com/favicon.ico"
+  },
+  {
+    "name": "Vercel",
+    "slug": "vercel",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "Frontend Cloud & Next.js",
+    "website": "https://vercel.com",
+    "logo": "https://vercel.com/favicon.ico"
+  },
+  {
+    "name": "Airbnb",
+    "slug": "airbnb",
+    "ats": "greenhouse",
+    "region": "Global",
+    "industry": "Travel & Hospitality Tech",
+    "website": "https://airbnb.com",
+    "logo": "https://airbnb.com/favicon.ico"
+  },
+  {
+    "name": "Coinbase",
+    "slug": "coinbase",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "Crypto & Web3 Infrastructure",
+    "website": "https://coinbase.com",
+    "logo": "https://coinbase.com/favicon.ico"
+  },
+  {
+    "name": "Pinterest",
+    "slug": "pinterest",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "Visual Search & Discovery",
+    "website": "https://pinterest.com",
+    "logo": "https://pinterest.com/favicon.ico"
+  },
+  {
+    "name": "Robinhood",
+    "slug": "robinhood",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "Fintech / Trading",
+    "website": "https://robinhood.com",
+    "logo": "https://robinhood.com/favicon.ico"
+  },
+  {
+    "name": "Datadog",
+    "slug": "datadog",
+    "ats": "greenhouse",
+    "region": "Global",
+    "industry": "Cloud Observability & Security",
+    "website": "https://datadoghq.com",
+    "logo": "https://datadoghq.com/favicon.ico"
+  },
+  {
+    "name": "Cloudflare",
+    "slug": "cloudflare",
+    "ats": "greenhouse",
+    "region": "Global",
+    "industry": "Cloud Networking & CDN",
+    "website": "https://cloudflare.com",
+    "logo": "https://cloudflare.com/favicon.ico"
+  },
+  {
+    "name": "Reddit",
+    "slug": "reddit",
+    "ats": "greenhouse",
+    "region": "Global",
+    "industry": "Social Media & Community",
+    "website": "https://reddit.com",
+    "logo": "https://reddit.com/favicon.ico"
+  },
+  {
+    "name": "Elastic",
+    "slug": "elastic",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "Search & Observability",
+    "website": "https://elastic.co",
+    "logo": "https://elastic.co/favicon.ico"
+  },
+  {
+    "name": "Dropbox",
+    "slug": "dropbox",
+    "ats": "greenhouse",
+    "region": "Global / Remote",
+    "industry": "Cloud Collaboration & Storage",
+    "website": "https://dropbox.com",
+    "logo": "https://dropbox.com/favicon.ico"
+  }
+]
